@@ -25,6 +25,7 @@ export const OUTPUT_FIELDS: OutputField[] = [
   { label: 'publisher', column: 'ZRAWPUBLISHER' },
   { label: 'author', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'authors.author' },
   { label: 'purchase_date', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'purchase_date' },
+  { label: 'publication_date', column: 'ZRAWPUBLICATIONDATE', type: 'coredata-timestamp' },
   { label: 'series_name', column: 'series_name' },
   { label: 'series_position', column: 'series_position_label' },
 ];

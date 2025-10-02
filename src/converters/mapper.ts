@@ -21,6 +21,11 @@ export function mapRows(rows: Record<string, unknown>[]): Record<string, unknown
         value = null;
       }
 
+      // Unixタイムスタンプ（秒）の変換
+      if (field.type === 'coredata-timestamp' && typeof value === 'number') {
+        value = value === 0 ? null : new Date(value * 1000).toISOString();
+      }
+
       output[field.label] = value;
     }
     return output;
