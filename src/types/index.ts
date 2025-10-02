@@ -9,7 +9,7 @@ export type OutputField = {
   label: string;
   column: string;
   plistPath?: string; // plistフィールドからの抽出パス (例: "authors.author")
-  type?: 'coredata-timestamp'; // Core Data形式のタイムスタンプ（2001-01-01からの秒数）
+  type?: 'unix-timestamp'; // Unixタイムスタンプ（1970-01-01からの秒数）
 };
 
 export type TableDump = {

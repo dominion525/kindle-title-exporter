@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { mapRows } from './mapper';
+import { mapRows, convertFieldValue } from './mapper';
+import type { OutputField } from '../types/index';
 
 describe('mapRows', () => {
   it('基本的なフィールドをマップ', () => {
@@ -102,5 +103,35 @@ describe('mapRows', () => {
     const result = mapRows(rows);
 
     expect(result[0].publication_date).toBe(null);
+  });
+});
+
+describe('convertFieldValue', () => {
+  it('通常の値はそのまま返す', () => {
+    const field: OutputField = { label: 'title', column: 'TITLE' };
+    expect(convertFieldValue('Test Book', field)).toBe('Test Book');
+    expect(convertFieldValue(123, field)).toBe(123);
+  });
+
+  it('plistPath指定時に値がnullならnull', () => {
+    const field: OutputField = { label: 'author', column: 'COL', plistPath: 'authors.author' };
+    expect(convertFieldValue(null, field)).toBe(null);
+    expect(convertFieldValue(undefined, field)).toBe(null);
+  });
+
+  it('unix-timestamp型で値が0ならnull', () => {
+    const field: OutputField = { label: 'date', column: 'DATE', type: 'unix-timestamp' };
+    expect(convertFieldValue(0, field)).toBe(null);
+  });
+
+  it('unix-timestamp型で値があればISO8601形式に変換', () => {
+    const field: OutputField = { label: 'date', column: 'DATE', type: 'unix-timestamp' };
+    expect(convertFieldValue(1353283200, field)).toBe('2012-11-19T00:00:00.000Z');
+  });
+
+  it('unix-timestamp型で値が数値以外なら変換しない', () => {
+    const field: OutputField = { label: 'date', column: 'DATE', type: 'unix-timestamp' };
+    expect(convertFieldValue('not a number', field)).toBe('not a number');
+    expect(convertFieldValue(null, field)).toBe(null);
   });
 });
