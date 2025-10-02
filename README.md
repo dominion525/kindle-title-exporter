@@ -2,7 +2,7 @@
 
 [English](README.md) | [日本語](README.ja.md)
 
-Export your Kindle for Mac library to CSV or JSON format. The output includes 12 fields with a header row.
+Export your Kindle for Mac library metadata (titles, authors, purchase dates, etc.) to CSV or JSON format. This tool reads book information only—it does not access or extract book content. The output includes 12 fields with a header row.
 
 > **Requirements**:
 > - macOS only
