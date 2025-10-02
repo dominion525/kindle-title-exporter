@@ -6,8 +6,8 @@ export type CliOptions = {
 };
 
 export type OutputField = {
-  column: string;
   label: string;
+  column: string;
   plistPath?: string; // plistフィールドからの抽出パス (例: "authors.author")
 };
 

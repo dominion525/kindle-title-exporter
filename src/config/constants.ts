@@ -19,12 +19,12 @@ export const DEFAULT_DB_PATH = (() => {
 })();
 
 export const OUTPUT_FIELDS: OutputField[] = [
-  { column: 'ZDISPLAYTITLE', label: 'title' },
-  { column: 'ZBOOKID', label: 'asin' },
-  { column: 'ZCONTENTTAGS', label: 'categories' },
-  { column: 'ZRAWPUBLISHER', label: 'publisher' },
-  { column: 'ZSYNCMETADATAATTRIBUTES', label: 'author', plistPath: 'authors.author' },
-  { column: 'ZSYNCMETADATAATTRIBUTES', label: 'purchase_date', plistPath: 'purchase_date' },
-  { column: 'series_name', label: 'series_name' },
-  { column: 'series_position_label', label: 'series_position' },
+  { label: 'title', column: 'ZDISPLAYTITLE' },
+  { label: 'asin', column: 'ZBOOKID' },
+  { label: 'categories', column: 'ZCONTENTTAGS' },
+  { label: 'publisher', column: 'ZRAWPUBLISHER' },
+  { label: 'author', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'authors.author' },
+  { label: 'purchase_date', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'purchase_date' },
+  { label: 'series_name', column: 'series_name' },
+  { label: 'series_position', column: 'series_position_label' },
 ];
