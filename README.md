@@ -30,20 +30,18 @@ npm run test:ui
 ## 使用方法
 
 ```bash
-# CSV出力（デフォルト）
-npm start -- -o output.csv
+# CSV出力（デフォルト、標準出力）
+npm start > output.csv
 
 # JSON出力
-npm start -- -f json -o output.json
-
-# 詳細モード
-npm start -- -v -o output.csv
-
-# 標準出力
-npm start -- -o -
+npm start -- -f json > output.json
 
 # カスタムDBパス
-npm start -- -d /path/to/BookData.sqlite -o output.csv
+npm start -- -d /path/to/BookData.sqlite > output.csv
+
+# npxで直接実行
+npx kindle-title-exporter > output.csv
+npx kindle-title-exporter -f json > output.json
 ```
 
 ## 出力フィールド
@@ -78,13 +76,12 @@ npm start -- -d /path/to/BookData.sqlite -o output.csv
 src/
 ├── index.ts              # エントリーポイント
 ├── cli/                  # CLI関連
-│   ├── args.ts          # 引数パーサー
-│   └── help.ts          # ヘルプ表示
+│   └── args.ts          # 引数パーサー
 ├── db/                   # データベース関連
 │   └── reader.ts        # SQLiteリーダー
 ├── converters/           # データ変換
 │   ├── plist.ts         # plistデコーダー
-│   └── projection.ts    # フィールド射影
+│   └── mapper.ts        # フィールドマッピング
 ├── formatters/           # 出力フォーマット
 │   ├── csv.ts           # CSV出力
 │   └── json.ts          # JSON出力
@@ -100,7 +97,7 @@ src/
 
 - `cli/args.test.ts` - CLI引数パーサー
 - `converters/plist.test.ts` - plistデコーダー
-- `converters/projection.test.ts` - フィールド射影
+- `converters/mapper.test.ts` - フィールドマッピング
 - `formatters/csv.test.ts` - CSV出力
 - `formatters/json.test.ts` - JSON出力
 
