@@ -1,35 +1,36 @@
 # kindle-title-exporter
 
-Export your Kindle library to CSV or JSON format from the local SQLite database.
+[English](README.md) | [日本語](README.ja.md)
 
-> **Note**: This tool is macOS only, as it reads from the Kindle for Mac database.
+Export your Kindle for Mac library to CSV or JSON format. The output includes 12 fields with a header row.
 
-[日本語版 README はこちら](README.ja.md)
-
-## Installation
-
-```bash
-npm install -g kindle-title-exporter
-```
+> **Requirements**:
+> - macOS only
+> - Kindle for Mac must be installed
 
 ## Usage
 
+### Using npx (No installation required)
+
 ```bash
 # Export to CSV (default)
-kindle-title-exporter > output.csv
+npx kindle-title-exporter > output.csv
 
 # Export to JSON
-kindle-title-exporter -f json > output.json
+npx kindle-title-exporter -f json > output.json
 
 # Custom database path
-kindle-title-exporter -d /path/to/BookData.sqlite > output.csv
+npx kindle-title-exporter -d /path/to/BookData.sqlite > output.csv
 ```
 
-### Using npx
+### Global installation
 
 ```bash
-npx kindle-title-exporter > output.csv
-npx kindle-title-exporter -f json > output.json
+npm install -g kindle-title-exporter
+
+# Then use:
+kindle-title-exporter > output.csv
+kindle-title-exporter -f json > output.json
 ```
 
 ## Output Fields
@@ -49,14 +50,9 @@ The tool exports 12 fields for each book:
 - `language` - Language code (e.g., ja, en)
 - `sort_title` - Sort title (for Japanese: katakana reading)
 
-## Development
+## Author
 
-See [README.ja.md](README.ja.md) for detailed documentation in Japanese, including:
-
-- Project structure
-- Testing
-- Database documentation
-- Development guide
+[dominion525](https://github.com/dominion525)
 
 ## License
 

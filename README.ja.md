@@ -1,6 +1,8 @@
 # kindle-title-exporter
 
-Kindleの蔵書リストを取得するツールです。
+[English](README.md) | [日本語](README.ja.md)
+
+Kindle for Macの蔵書リストをCSV/JSON形式でエクスポートするツールです。ヘッダー行を含む12項目のフィールドを出力します。
 
 ## インストール
 
@@ -110,3 +112,11 @@ src/
 - [zbook-fields.md](docs/zbook-fields.md) - ZBOOKテーブルフィールド詳細
 - [plist-format.md](docs/plist-format.md) - plist形式の詳細
 - [series-relations.md](docs/series-relations.md) - シリーズ情報の取得方法
+
+## Author
+
+[dominion525](https://github.com/dominion525)
+
+## License
+
+MIT

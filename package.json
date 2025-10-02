@@ -16,8 +16,8 @@
     "url": "git+https://github.com/dominion525/kindle-title-exporter.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "dominion525",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dominion525/kindle-title-exporter/issues"
   },
