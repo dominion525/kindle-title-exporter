@@ -11,29 +11,42 @@ export function isMacOS(): boolean {
   return process.platform === 'darwin';
 }
 
-// EPIPEエラー処理（パイプの途中終了）
-process.stdout.on('error', (error) => {
-  const err = error as NodeJS.ErrnoException;
-  if (err.code === 'EPIPE') {
-    process.exit(0);
+/**
+ * EPIPEエラーハンドラーを設定
+ * パイプの途中終了時に正常終了させる
+ */
+export function setupStdoutErrorHandler(): void {
+  process.stdout.on('error', (error) => {
+    const err = error as NodeJS.ErrnoException;
+    if (err.code === 'EPIPE') {
+      process.exit(0);
+    }
+    throw err;
+  });
+}
+
+/**
+ * 出力文字列を生成（ビジネスロジック）
+ * @param args コマンドライン引数
+ * @returns 出力文字列（CSV/JSON）
+ */
+export function generateOutput(args: string[]): string {
+  if (!isMacOS()) {
+    throw new Error('This tool is only supported on macOS');
   }
-  throw err;
-});
+
+  const options = parseArgs(args);
+  const rawDump = readTableData(options.dbPath);
+  const outputRows = mapRows(rawDump.rows);
+
+  return options.format === 'csv'
+    ? rowsToCsv({ columns: OUTPUT_FIELDS.map(f => f.label), rows: outputRows })
+    : rowsToJson(outputRows);
+}
 
 function main(): void {
   try {
-    if (!isMacOS()) {
-      throw new Error('This tool is only supported on macOS');
-    }
-
-    const options = parseArgs(process.argv.slice(2));
-    const rawDump = readTableData(options.dbPath);
-    const outputRows = mapRows(rawDump.rows);
-
-    const content = options.format === 'csv'
-      ? rowsToCsv({ columns: OUTPUT_FIELDS.map(f => f.label), rows: outputRows })
-      : rowsToJson(outputRows);
-
+    const content = generateOutput(process.argv.slice(2));
     process.stdout.write(content);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
@@ -43,5 +56,6 @@ function main(): void {
 }
 
 if (require.main === module) {
+  setupStdoutErrorHandler();
   void main();
 }
