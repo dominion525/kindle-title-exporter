@@ -1,6 +1,6 @@
 {
   "name": "kindle-title-exporter",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Export your Kindle library to CSV or JSON",
   "main": "dist/index.js",
   "files": [
