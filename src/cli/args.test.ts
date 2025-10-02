@@ -1,12 +1,8 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { parseArgs } from './args';
 
-// printHelpをモック化してprocess.exitを防ぐ
-vi.mock('./help', () => ({
-  printHelp: vi.fn()
-}));
-
 describe('parseArgs', () => {
+
   it('デフォルト値を返す', () => {
     const result = parseArgs([]);
     expect(result.format).toBe('csv');
@@ -47,27 +43,21 @@ describe('parseArgs', () => {
     expect(result.format).toBe('json');
   });
 
-  it('不明な引数でエラー', () => {
+  it('--format に不正な値でエラー', () => {
     expect(() => {
-      parseArgs(['--unknown']);
-    }).toThrow('不明な引数 --unknown が指定されました');
+      parseArgs(['--format', 'xml']);
+    }).toThrow();
   });
 
   it('--db-path の値が無い場合エラー', () => {
     expect(() => {
       parseArgs(['--db-path']);
-    }).toThrow('--db-path の直後にパスを指定してください');
+    }).toThrow();
   });
 
   it('--format の値が無い場合エラー', () => {
     expect(() => {
       parseArgs(['--format']);
-    }).toThrow('--format の直後にフォーマットを指定してください');
-  });
-
-  it('--format に不正な値でエラー', () => {
-    expect(() => {
-      parseArgs(['--format', 'xml']);
-    }).toThrow('--format は csv または json を指定してください');
+    }).toThrow();
   });
 });

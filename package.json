@@ -1,7 +1,7 @@
 {
   "name": "kindle-title-exporter",
-  "version": "1.0.0",
-  "description": "Kindleの蔵書リストを取得するツールのPoC",
+  "version": "0.0.1",
+  "description": "Export your Kindle library to CSV or JSON",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -24,7 +24,8 @@
   "homepage": "https://github.com/dominion525/kindle-title-exporter#readme",
   "dependencies": {
     "better-sqlite3": "^12.4.1",
-    "bplist-parser": "^0.3.2"
+    "bplist-parser": "^0.3.2",
+    "commander": "^14.0.1"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",

@@ -1,6 +1,6 @@
+import { Command } from 'commander';
 import type { CliOptions, OutputFormat } from '../types/index';
 import { DEFAULT_DB_PATH } from '../config/constants';
-import { printHelp } from './help';
 
 /**
  * コマンドライン引数をパース
@@ -8,51 +8,29 @@ import { printHelp } from './help';
  * @returns パース済みのCLIオプション
  */
 export function parseArgs(argv: string[]): CliOptions {
-  const args = [...argv];
-  let dbPath: string | undefined;
-  let format: OutputFormat | undefined;
+  const program = new Command();
 
-  while (args.length > 0) {
-    const arg = args.shift();
-    if (!arg) {
-      continue;
-    }
-    switch (arg) {
-      case '--db-path':
-      case '-d': {
-        const value = args.shift();
-        if (!value) {
-          throw new Error(`${arg} の直後にパスを指定してください`);
-        }
-        dbPath = value;
-        break;
-      }
-      case '--format':
-      case '-f': {
-        const value = args.shift();
-        if (!value) {
-          throw new Error(`${arg} の直後にフォーマットを指定してください (csv または json)`);
-        }
-        const normalized = value.toLowerCase();
-        if (normalized !== 'csv' && normalized !== 'json') {
-          throw new Error(`--format は csv または json を指定してください (指定値: ${value})`);
-        }
-        format = normalized as OutputFormat;
-        break;
-      }
-      case '--help':
-      case '-h': {
-        printHelp();
-        process.exit(0);
-      }
-      default: {
-        throw new Error(`不明な引数 ${arg} が指定されました`);
-      }
-    }
+  program
+    .option('-d, --db-path <path>', 'Path to SQLite database file', DEFAULT_DB_PATH)
+    .option('-f, --format <type>', 'Output format (csv or json)', 'csv')
+    .addHelpText('after', `
+Examples:
+  $ npx kindle-title-exporter > output.csv
+  $ npx kindle-title-exporter -f json > output.json
+  $ npx kindle-title-exporter -d /path/to/BookData.sqlite > books.csv
+`)
+    .parse(argv, { from: 'user' });
+
+  const options = program.opts();
+
+  // フォーマット検証
+  const format = options.format.toLowerCase();
+  if (format !== 'csv' && format !== 'json') {
+    program.error(`error: format must be either 'csv' or 'json' (got '${options.format}')`);
   }
 
   return {
-    dbPath: dbPath ?? DEFAULT_DB_PATH,
-    format: format ?? 'csv',
+    dbPath: options.dbPath,
+    format: format as OutputFormat,
   };
 }
