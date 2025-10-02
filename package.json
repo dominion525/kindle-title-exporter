@@ -1,0 +1,60 @@
+{
+  "name": "kindle-title-exporter",
+  "version": "1.0.0",
+  "description": "Export your Kindle library to CSV or JSON",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dominion525/kindle-title-exporter.git"
+  },
+  "keywords": [
+    "kindle",
+    "export",
+    "csv",
+    "json",
+    "ebook",
+    "macos",
+    "kindle-for-mac",
+    "library"
+  ],
+  "author": "dominion525",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/dominion525/kindle-title-exporter/issues"
+  },
+  "homepage": "https://github.com/dominion525/kindle-title-exporter#readme",
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "bplist-parser": "^0.3.2",
+    "commander": "^14.0.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^24.5.2",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "type": "commonjs",
+  "bin": {
+    "kindle-title-exporter": "./dist/index.js"
+  }
+}
