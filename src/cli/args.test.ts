@@ -10,8 +10,6 @@ describe('parseArgs', () => {
   it('デフォルト値を返す', () => {
     const result = parseArgs([]);
     expect(result.format).toBe('csv');
-    expect(result.verbose).toBe(false);
-    expect(result.useStdout).toBe(true);
     expect(result.dbPath).toContain('BookData.sqlite');
   });
 
@@ -23,18 +21,6 @@ describe('parseArgs', () => {
   it('-d オプションをパース', () => {
     const result = parseArgs(['-d', '/another/path.sqlite']);
     expect(result.dbPath).toBe('/another/path.sqlite');
-  });
-
-  it('--output オプションをパース', () => {
-    const result = parseArgs(['--output', 'output.csv']);
-    expect(result.outputPath).toBe('output.csv');
-    expect(result.useStdout).toBe(false);
-  });
-
-  it('--output - で標準出力', () => {
-    const result = parseArgs(['--output', '-']);
-    expect(result.useStdout).toBe(true);
-    expect(result.outputPath).toBeUndefined();
   });
 
   it('--format json をパース', () => {
@@ -52,27 +38,13 @@ describe('parseArgs', () => {
     expect(result.format).toBe('json');
   });
 
-  it('--verbose をパース', () => {
-    const result = parseArgs(['--verbose']);
-    expect(result.verbose).toBe(true);
-  });
-
-  it('-v をパース', () => {
-    const result = parseArgs(['-v']);
-    expect(result.verbose).toBe(true);
-  });
-
   it('複数オプションを組み合わせ', () => {
     const result = parseArgs([
       '-d', '/path/to/db',
-      '-o', 'out.json',
-      '-f', 'json',
-      '-v'
+      '-f', 'json'
     ]);
     expect(result.dbPath).toBe('/path/to/db');
-    expect(result.outputPath).toBe('out.json');
     expect(result.format).toBe('json');
-    expect(result.verbose).toBe(true);
   });
 
   it('不明な引数でエラー', () => {

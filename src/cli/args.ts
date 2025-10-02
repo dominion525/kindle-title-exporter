@@ -10,10 +10,7 @@ import { printHelp } from './help';
 export function parseArgs(argv: string[]): CliOptions {
   const args = [...argv];
   let dbPath: string | undefined;
-  let outputPath: string | undefined;
-  let useStdout = true;
   let format: OutputFormat | undefined;
-  let verbose = false;
 
   while (args.length > 0) {
     const arg = args.shift();
@@ -30,21 +27,6 @@ export function parseArgs(argv: string[]): CliOptions {
         dbPath = value;
         break;
       }
-      case '--output':
-      case '-o': {
-        const value = args.shift();
-        if (!value) {
-          throw new Error(`${arg} の直後に出力先パスを指定してください`);
-        }
-        if (value === '-') {
-          useStdout = true;
-          outputPath = undefined;
-        } else {
-          useStdout = false;
-          outputPath = value;
-        }
-        break;
-      }
       case '--format':
       case '-f': {
         const value = args.shift();
@@ -56,11 +38,6 @@ export function parseArgs(argv: string[]): CliOptions {
           throw new Error(`--format は csv または json を指定してください (指定値: ${value})`);
         }
         format = normalized as OutputFormat;
-        break;
-      }
-      case '--verbose':
-      case '-v': {
-        verbose = true;
         break;
       }
       case '--help':
@@ -76,9 +53,6 @@ export function parseArgs(argv: string[]): CliOptions {
 
   return {
     dbPath: dbPath ?? DEFAULT_DB_PATH,
-    outputPath,
     format: format ?? 'csv',
-    verbose,
-    useStdout,
   };
 }

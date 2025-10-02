@@ -2,10 +2,7 @@ export type OutputFormat = 'csv' | 'json';
 
 export type CliOptions = {
   dbPath: string;
-  outputPath?: string;
   format: OutputFormat;
-  verbose: boolean;
-  useStdout: boolean;
 };
 
 export type OutputField = {

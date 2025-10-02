@@ -39,23 +39,18 @@ export function projectRows(rows: Record<string, unknown>[], fields: OutputField
 
 /**
  * 利用可能なカラムからフィールドを選択
- * @param verbose 詳細モードフラグ
  * @param availableColumns 利用可能なカラム名
- * @param basicFields 基本フィールド定義
- * @param verboseFields 詳細フィールド定義
+ * @param fields フィールド定義
  * @returns 選択されたフィールド定義
  */
 export function selectFields(
-  verbose: boolean,
   availableColumns: string[],
-  basicFields: OutputField[],
-  verboseFields: OutputField[]
+  fields: OutputField[]
 ): OutputField[] {
-  const base = verbose ? verboseFields : basicFields;
   const available = new Set(availableColumns);
-  const selected = base.filter((field) => available.has(field.column));
+  const selected = fields.filter((field) => available.has(field.column));
   if (selected.length === 0) {
-    const expected = base.map((field) => field.column).join(', ');
+    const expected = fields.map((field) => field.column).join(', ');
     throw new Error(`ZBOOK テーブルに必要な列が見つかりません。期待値: ${expected}`);
   }
   return selected;

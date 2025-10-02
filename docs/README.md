@@ -16,7 +16,7 @@
 
 **フルパス例**:
 ```
-/Users/satoshi/Library/Containers/com.amazon.Lassen/Data/Library/Protected/BookData.sqlite
+~/Library/Containers/com.amazon.Lassen/Data/Library/Protected/BookData.sqlite
 ```
 
 ### アクセス方法
