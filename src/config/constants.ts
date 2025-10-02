@@ -18,8 +18,6 @@ export const DEFAULT_DB_PATH = (() => {
   return 'BookData.sqlite';
 })();
 
-export const TARGET_TABLE_NAME = 'ZBOOK';
-
 export const OUTPUT_FIELDS: OutputField[] = [
   { column: 'ZDISPLAYTITLE', label: 'title' },
   { column: 'ZBOOKID', label: 'asin' },

@@ -1,6 +1,5 @@
 import Database from 'better-sqlite3';
 import type { TableDump } from '../types/index';
-import { TARGET_TABLE_NAME } from '../config/constants';
 
 /**
  * データベースからテーブルデータを読み取り
@@ -11,11 +10,11 @@ export function readTableData(dbPath: string): TableDump {
   const db = new Database(dbPath, { readonly: true });
   try {
     // ZBOOKの基本カラムを取得
-    const pragmaStmt = db.prepare(`PRAGMA table_info("${TARGET_TABLE_NAME}")`);
+    const pragmaStmt = db.prepare(`PRAGMA table_info("ZBOOK")`);
     const pragmaInfo = pragmaStmt.all() as Array<{ name: string }>;
     const baseColumns = pragmaInfo.map(({ name }) => String(name));
     if (baseColumns.length === 0) {
-      throw new Error(`テーブル ${TARGET_TABLE_NAME} は存在しないか、列がありません`);
+      throw new Error(`テーブル ZBOOK は存在しないか、列がありません`);
     }
 
     // シリーズ情報を含むカラムリスト
@@ -33,7 +32,7 @@ export function readTableData(dbPath: string): TableDump {
         ZGROUP.ZDISPLAYNAME as series_name,
         ZGROUPITEM.ZPOSITION as series_position,
         ZGROUPITEM.ZPOSITIONLABEL as series_position_label
-      FROM "${TARGET_TABLE_NAME}" AS ZBOOK
+      FROM "ZBOOK" AS ZBOOK
       LEFT JOIN ZGROUPITEM ON ZBOOK.Z_PK = ZGROUPITEM.ZBOOK
       LEFT JOIN ZGROUP ON ZGROUPITEM.ZPARENTCONTAINER = ZGROUP.Z_PK
       ORDER BY ZBOOK.ZSORTTITLE ASC
