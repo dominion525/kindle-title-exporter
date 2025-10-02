@@ -212,13 +212,16 @@ LEFT JOIN ZGROUP ON ZGROUPITEM.ZPARENTCONTAINER = ZGROUP.Z_PK;
 
 ### Q4. タイムスタンプの形式は？
 
-**A**: Core Data形式（2001-01-01からの秒数）です。
+**A**: Unix timestamp（1970-01-01からの秒数）です。
 
 ```javascript
-const CORE_DATA_EPOCH = 978307200; // 2001-01-01 00:00:00 UTCのUnix timestamp
-const unixTimestamp = coreDataTimestamp + CORE_DATA_EPOCH;
+// Unix timestamp → JavaScript Date
 const date = new Date(unixTimestamp * 1000);
 ```
+
+**例**:
+- Unix timestamp: `1353283200`
+- 日時: `2012-11-19T00:00:00.000Z`
 
 詳細は [database-overview.md](./database-overview.md) または [zbook-fields.md](./zbook-fields.md) を参照
 
@@ -229,18 +232,6 @@ const date = new Date(unixTimestamp * 1000);
 - データベースの破損リスクがあります
 - Kindleアプリの同期で上書きされる可能性があります
 - 読み取り専用での利用を推奨します
-
-## 実装例
-
-このリポジトリの`src/index.ts`には、実際にこのデータベースから情報を抽出してCSV/JSON形式で出力するCLIツールの実装例があります。
-
-### 主要な実装内容
-
-1. **plistのデコード**: `bplist-parser`を使用したNSKeyedArchiveのデコード
-2. **シリーズ情報の取得**: LEFT JOINを使用したシリーズ情報の結合
-3. **CSV/JSON出力**: 取得したデータの整形と出力
-
-詳細は [../src/index.ts](../src/index.ts) を参照してください。
 
 ## 貢献
 
