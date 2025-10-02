@@ -6,27 +6,10 @@ import type { TableDump } from '../types/index';
  * @returns CSV形式の文字列
  */
 function formatCsvValue(value: unknown): string {
-  if (value === null || value === undefined) {
-    return '';
-  }
-  if (typeof value === 'number' || typeof value === 'boolean') {
-    return String(value);
-  }
-  if (value instanceof Date) {
-    return value.toISOString();
-  }
-  if (Buffer.isBuffer(value)) {
-    return `0x${value.toString('hex')}`;
-  }
-  if (Array.isArray(value)) {
-    // 配列はカンマ区切りで結合
-    const joined = value.map(v => String(v ?? '')).join(', ');
-    const escaped = joined.replace(/"/g, '""');
-    return `"${escaped}"`;
-  }
+  if (value == null) return '';
+
   const text = String(value);
-  const escaped = text.replace(/"/g, '""');
-  return `"${escaped}"`;
+  return `"${text.replace(/"/g, '""')}"`;
 }
 
 /**

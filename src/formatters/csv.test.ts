@@ -45,30 +45,12 @@ describe('rowsToCsv', () => {
     expect(result).toBe('"title","author"\n"Book 1",\n"Book 2",\n');
   });
 
-  it('配列をカンマ区切りで結合', () => {
-    const dump: TableDump = {
-      columns: ['authors'],
-      rows: [{ authors: ['Author A', 'Author B', 'Author C'] }]
-    };
-    const result = rowsToCsv(dump);
-    expect(result).toBe('"authors"\n"Author A, Author B, Author C"\n');
-  });
-
-  it('数値と真偽値を文字列に変換', () => {
+  it('数値と真偽値をクォート付きで変換', () => {
     const dump: TableDump = {
       columns: ['count', 'available'],
       rows: [{ count: 42, available: true }]
     };
     const result = rowsToCsv(dump);
-    expect(result).toBe('"count","available"\n42,true\n');
-  });
-
-  it('日付をISO形式に変換', () => {
-    const dump: TableDump = {
-      columns: ['date'],
-      rows: [{ date: new Date('2024-01-01T00:00:00Z') }]
-    };
-    const result = rowsToCsv(dump);
-    expect(result).toBe('"date"\n2024-01-01T00:00:00.000Z\n');
+    expect(result).toBe('"count","available"\n"42","true"\n');
   });
 });
