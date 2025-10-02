@@ -1,112 +1,63 @@
 # kindle-title-exporter
 
-Kindleの蔵書リストを取得するツールです。
+Export your Kindle library to CSV or JSON format from the local SQLite database.
 
-## インストール
+> **Note**: This tool is macOS only, as it reads from the Kindle for Mac database.
+
+[日本語版 README はこちら](README.ja.md)
+
+## Installation
 
 ```bash
-npm install
+npm install -g kindle-title-exporter
 ```
 
-## 開発
+## Usage
 
 ```bash
-# ビルド
-npm run build
+# Export to CSV (default)
+kindle-title-exporter > output.csv
 
-# 開発モード（ts-node）
-npm run dev -- -o output.csv
+# Export to JSON
+kindle-title-exporter -f json > output.json
 
-# テスト実行
-npm test
-
-# テストカバレッジ
-npm run test:coverage
-
-# テストUI
-npm run test:ui
+# Custom database path
+kindle-title-exporter -d /path/to/BookData.sqlite > output.csv
 ```
 
-## 使用方法
+### Using npx
 
 ```bash
-# CSV出力（デフォルト、標準出力）
-npm start > output.csv
-
-# JSON出力
-npm start -- -f json > output.json
-
-# カスタムDBパス
-npm start -- -d /path/to/BookData.sqlite > output.csv
-
-# npxで直接実行
 npx kindle-title-exporter > output.csv
 npx kindle-title-exporter -f json > output.json
 ```
 
-## 出力フィールド
+## Output Fields
 
-以下のフィールドが出力されます（全12項目）：
+The tool exports 12 fields for each book:
 
-### 識別情報
-- `book_id` - 書籍ID (例: A:B009DEMC8W-0)
-- `asin` - 純粋なASIN (例: B009DEMC8W)
+- `book_id` - Book ID (e.g., A:B009DEMC8W-0)
+- `asin` - Pure ASIN (e.g., B009DEMC8W)
+- `display_title` - Display title
+- `author` - Author name(s)
+- `series_name` - Series name (if applicable)
+- `series_position` - Position in series (if applicable)
+- `publisher` - Publisher name
+- `publication_date` - Publication date (ISO 8601)
+- `purchase_date` - Purchase date (ISO 8601)
+- `content_tags` - Content tags (array)
+- `language` - Language code (e.g., ja, en)
+- `sort_title` - Sort title (for Japanese: katakana reading)
 
-### コンテンツ情報
-- `display_title` - 表示用タイトル
-- `author` - 著者名
-- `series_name` - シリーズ名
-- `series_position` - シリーズ内順序
+## Development
 
-### 出版情報
-- `publisher` - 出版社名
-- `publication_date` - 出版日 (ISO 8601形式)
+See [README.ja.md](README.ja.md) for detailed documentation in Japanese, including:
 
-### メタ情報
-- `purchase_date` - 購入日時 (ISO 8601形式)
-- `content_tags` - コンテンツタグ (配列)
-- `language` - 言語コード (例: ja, en, Unknown)
-- `sort_title` - ソート用タイトル (カタカナ表記など)
+- Project structure
+- Testing
+- Database documentation
+- Development guide
 
-> **Note**: CSVはヘッダー付きで出力されるため、必要に応じて列の並べ替えは利用側で行ってください。
+## License
 
-## プロジェクト構造
-
-```
-src/
-├── index.ts              # エントリーポイント
-├── cli/                  # CLI関連
-│   └── args.ts          # 引数パーサー
-├── db/                   # データベース関連
-│   └── reader.ts        # SQLiteリーダー
-├── converters/           # データ変換
-│   ├── plist.ts         # plistデコーダー
-│   └── mapper.ts        # フィールドマッピング
-├── formatters/           # 出力フォーマット
-│   ├── csv.ts           # CSV出力
-│   └── json.ts          # JSON出力
-├── config/               # 設定
-│   └── constants.ts     # 定数定義
-└── types/                # 型定義
-    └── index.ts         # 共通型
-```
-
-## テスト
-
-各モジュールは`*.test.ts`ファイルでテストされています：
-
-- `cli/args.test.ts` - CLI引数パーサー
-- `converters/plist.test.ts` - plistデコーダー
-- `converters/mapper.test.ts` - フィールドマッピング
-- `formatters/csv.test.ts` - CSV出力
-- `formatters/json.test.ts` - JSON出力
-
-## ドキュメント
-
-データベース構造の詳細は `docs/` ディレクトリを参照してください：
-
-- [README.md](docs/README.md) - 概要とクイックスタート
-- [database-overview.md](docs/database-overview.md) - データベース全体構造（ER図含む）
-- [zbook-fields.md](docs/zbook-fields.md) - ZBOOKテーブルフィールド詳細
-- [plist-format.md](docs/plist-format.md) - plist形式の詳細
-- [series-relations.md](docs/series-relations.md) - シリーズ情報の取得方法
+MIT
