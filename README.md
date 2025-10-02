@@ -46,6 +46,32 @@ npm start -- -o -
 npm start -- -d /path/to/BookData.sqlite -o output.csv
 ```
 
+## 出力フィールド
+
+以下のフィールドが出力されます（全12項目）：
+
+### 識別情報
+- `book_id` - 書籍ID (例: A:B009DEMC8W-0)
+- `asin` - 純粋なASIN (例: B009DEMC8W)
+
+### コンテンツ情報
+- `display_title` - 表示用タイトル
+- `author` - 著者名
+- `series_name` - シリーズ名
+- `series_position` - シリーズ内順序
+
+### 出版情報
+- `publisher` - 出版社名
+- `publication_date` - 出版日 (ISO 8601形式)
+
+### メタ情報
+- `purchase_date` - 購入日時 (ISO 8601形式)
+- `content_tags` - コンテンツタグ (配列)
+- `language` - 言語コード (例: ja, en, Unknown)
+- `sort_title` - ソート用タイトル (カタカナ表記など)
+
+> **Note**: CSVはヘッダー付きで出力されるため、必要に応じて列の並べ替えは利用側で行ってください。
+
 ## プロジェクト構造
 
 ```

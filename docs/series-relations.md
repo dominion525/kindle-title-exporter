@@ -83,7 +83,8 @@ ZGROUP (ZDISPLAYNAME)
    - シリーズ内の位置情報も保持
 
 3. **NULL値の意味**:
-   - シリーズに属さない書籍は、LEFT JOINの結果として`NULL`となる
+   - シリーズ情報が未設定の書籍は、LEFT JOINの結果として`NULL`となる
+   - 注意: 実際にはシリーズ作品でもデータベースに登録されていない場合がある
 
 ## シリーズ情報の取得SQL
 
@@ -390,21 +391,14 @@ ORDER BY unread_books DESC;
 
 ## 注意点
 
-### パフォーマンス
-
-- LEFT JOINは比較的重い処理
-- 大量のレコードを処理する場合はインデックスを確認
-- 必要に応じてWHERE句でフィルタリング
-
 ### NULL値の扱い
 
-- シリーズに属さない書籍は`series_name`が`NULL`
+- シリーズ情報が未設定の書籍は`series_name`が`NULL`
 - `NULL`チェックを忘れずに行う
 - TypeScriptでは`string | null`型で扱う
+- 注意: 実際にはシリーズ作品でもデータベースに登録されていない場合がある
 
-### 位置とラベルの不一致
+### 位置とラベルの関係
 
-- 通常は`series_position + 1 = series_position_label`
-- まれに異なる場合がある（特別編など）
-- 表示には`series_position_label`を使用
-- ソートには`series_position`を使用
+- 常に`series_position + 1 = series_position_label`の関係が成立すると思われる
+- 表示には`series_position_label`を使った方が分かりやすい
