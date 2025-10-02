@@ -7,6 +7,10 @@ import { rowsToCsv } from './formatters/csv';
 import { rowsToJson } from './formatters/json';
 import { OUTPUT_FIELDS } from './config/constants';
 
+export function isMacOS(): boolean {
+  return process.platform === 'darwin';
+}
+
 // EPIPEエラー処理（パイプの途中終了）
 process.stdout.on('error', (error) => {
   const err = error as NodeJS.ErrnoException;
@@ -18,6 +22,10 @@ process.stdout.on('error', (error) => {
 
 function main(): void {
   try {
+    if (!isMacOS()) {
+      throw new Error('This tool is only supported on macOS');
+    }
+
     const options = parseArgs(process.argv.slice(2));
     const rawDump = readTableData(options.dbPath);
     const outputRows = mapRows(rawDump.rows);
@@ -34,4 +42,6 @@ function main(): void {
   }
 }
 
-void main();
+if (require.main === module) {
+  void main();
+}

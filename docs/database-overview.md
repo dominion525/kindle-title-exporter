@@ -196,22 +196,21 @@ ZARTICLE (記事情報)
 
 ## 重要な注意点
 
-### Core Dataのタイムスタンプ形式
+### タイムスタンプ形式
 
-Core Dataで管理されているタイムスタンプは、**2001-01-01 00:00:00 UTC**からの秒数で保存されています。
+`ZRAWPUBLICATIONDATE`などのタイムスタンプフィールドは、**Unix タイムスタンプ（1970-01-01 00:00:00 UTC からの秒数）**で保存されています。
 
 **変換方法**:
 ```javascript
-// Core Data timestamp → Unix timestamp
-const CORE_DATA_EPOCH = new Date('2001-01-01T00:00:00Z').getTime() / 1000;
-const unixTimestamp = coreDataTimestamp + CORE_DATA_EPOCH;
+// Unix timestamp → JavaScript Date
 const date = new Date(unixTimestamp * 1000);
 ```
 
 **例**:
-- Core Data値: `1537257205`
-- Unix timestamp: `1537257205 + 978307200 = 2515564405`
-- 日時: `2049-09-18T07:53:25.000Z`
+- Unix timestamp: `1353283200`
+- 日時: `2012-11-19T00:00:00.000Z`
+
+**注意**: `0`の値は「データなし」を意味するため、`null`として扱います。
 
 ### BLOBフィールドの扱い
 
