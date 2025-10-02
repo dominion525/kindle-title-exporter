@@ -1,19 +1,6 @@
 import Database from 'better-sqlite3';
-import fs from 'node:fs';
 import type { TableDump } from '../types/index';
 import { TARGET_TABLE_NAME } from '../config/constants';
-
-/**
- * ファイルが読み取り可能か確認
- * @param filePath ファイルパス
- * @throws ファイルが存在しない、または読み取り不可の場合
- */
-function ensureReadableFile(filePath: string): void {
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`SQLiteファイルが見つかりません: ${filePath}`);
-  }
-  fs.accessSync(filePath, fs.constants.R_OK);
-}
 
 /**
  * データベースからテーブルデータを読み取り
@@ -21,7 +8,6 @@ function ensureReadableFile(filePath: string): void {
  * @returns テーブルダンプデータ
  */
 export function readTableData(dbPath: string): TableDump {
-  ensureReadableFile(dbPath);
   const db = new Database(dbPath, { readonly: true });
   try {
     // ZBOOKの基本カラムを取得
