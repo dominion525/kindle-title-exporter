@@ -117,6 +117,12 @@ src/
 
 [dominion525](https://github.com/dominion525)
 
+## 免責事項
+
+本ツールは**非公式**であり、AmazonまたはKindleとは一切関係がなく、承認や推奨を受けたものではありません。
+
+「Kindle」はAmazon.com, Inc.の登録商標です。本ソフトウェアは、機能説明のためにのみ（Kindle for Macのデータベースファイルを読み取る）「Kindle」という名称を使用しています（nominative fair use）。本ツールは、デジタル著作権管理（DRM）やコピープロテクション機構を改変、回避、妨害するものではありません。
+
 ## License
 
 MIT

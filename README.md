@@ -54,6 +54,12 @@ The tool exports 12 fields for each book:
 
 [dominion525](https://github.com/dominion525)
 
+## Disclaimer
+
+This is an **unofficial** tool and is not affiliated with, endorsed by, or connected to Amazon or Kindle in any way.
+
+"Kindle" is a registered trademark of Amazon.com, Inc. This software uses the name "Kindle" solely to describe its functionality (reading Kindle for Mac database files) under nominative fair use principles. This tool does not modify, circumvent, or interfere with any digital rights management (DRM) or copy protection mechanisms.
+
 ## License
 
 MIT
