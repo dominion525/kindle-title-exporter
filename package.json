@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dominion525/kindle-title-exporter.git"
+    "url": "git+https://github.com/dominion525/kindle-title-exporter.git"
   },
   "keywords": [
     "kindle",
@@ -56,6 +56,6 @@
   },
   "type": "commonjs",
   "bin": {
-    "kindle-title-exporter": "./dist/index.js"
+    "kindle-title-exporter": "dist/index.js"
   }
 }
