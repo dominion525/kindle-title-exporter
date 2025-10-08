@@ -14,7 +14,8 @@
     "dev": "ts-node src/index.ts",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "prepublishOnly": "rm -rf dist && npm run build"
   },
   "repository": {
     "type": "git",
@@ -55,6 +56,6 @@
   },
   "type": "commonjs",
   "bin": {
-    "kindle-title-exporter": "./dist/index.js"
+    "kindle-title-exporter": "dist/index.js"
   }
 }

@@ -2,7 +2,7 @@
 
 [English](README.md) | [日本語](README.ja.md)
 
-Kindle for Macの蔵書リストをCSV/JSON形式でエクスポートするツールです。ヘッダー行を含む12項目のフィールドを出力します。
+Kindle for Macの蔵書情報（タイトル、著者、購入日など）をCSV/JSON形式でエクスポートするツールです。本ツールは書籍のメタデータのみを読み取り、書籍の本文やコンテンツには一切アクセスしません。ヘッダー行を含む12項目のフィールドを出力します。
 
 ## インストール
 
@@ -51,24 +51,24 @@ npx kindle-title-exporter -f json > output.json
 以下のフィールドが出力されます（全12項目）：
 
 ### 識別情報
-- `book_id` - 書籍ID (例: A:B009DEMC8W-0)
+- `bookId` - 書籍ID (例: A:B009DEMC8W-0)
 - `asin` - 純粋なASIN (例: B009DEMC8W)
 
 ### コンテンツ情報
-- `display_title` - 表示用タイトル
+- `title` - タイトル
 - `author` - 著者名
-- `series_name` - シリーズ名
-- `series_position` - シリーズ内順序
+- `seriesName` - シリーズ名
+- `seriesNumber` - シリーズ番号
 
 ### 出版情報
 - `publisher` - 出版社名
-- `publication_date` - 出版日 (ISO 8601形式)
+- `publicationDate` - 出版日 (ISO 8601形式)
 
 ### メタ情報
-- `purchase_date` - 購入日時 (ISO 8601形式)
-- `content_tags` - コンテンツタグ (配列)
+- `purchaseDate` - 購入日時 (ISO 8601形式)
+- `contentTags` - コンテンツタグ (配列)
 - `language` - 言語コード (例: ja, en, Unknown)
-- `sort_title` - ソート用タイトル (カタカナ表記など)
+- `sortTitle` - ソート用タイトル (カタカナ表記など)
 
 > **Note**: CSVはヘッダー付きで出力されるため、必要に応じて列の並べ替えは利用側で行ってください。
 
@@ -116,6 +116,12 @@ src/
 ## Author
 
 [dominion525](https://github.com/dominion525)
+
+## 免責事項
+
+本ツールは**非公式**であり、AmazonまたはKindleとは一切関係がなく、承認や推奨を受けたものではありません。
+
+「Kindle」はAmazon.com, Inc.の登録商標です。本ソフトウェアは、機能説明のためにのみ（Kindle for Macのデータベースファイルを読み取る）「Kindle」という名称を使用しています（nominative fair use）。本ツールは、デジタル著作権管理（DRM）やコピープロテクション機構を改変、回避、妨害するものではありません。
 
 ## License
 

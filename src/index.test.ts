@@ -74,7 +74,7 @@ describe('generateOutput', () => {
 
     const result = generateOutput(['-d', TEST_DB_PATH, '-f', 'csv']);
 
-    expect(result).toContain('display_title');
+    expect(result).toContain('title');
     expect(result).toContain('Test Book');
   });
 
@@ -90,7 +90,7 @@ describe('generateOutput', () => {
 
     const result = generateOutput(['-d', TEST_DB_PATH, '-f', 'json']);
 
-    expect(result).toContain('"display_title"');
+    expect(result).toContain('"title"');
     expect(result).toContain('Test Book');
   });
 
