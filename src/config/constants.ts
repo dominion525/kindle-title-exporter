@@ -20,19 +20,19 @@ export const DEFAULT_DB_PATH = (() => {
 
 export const OUTPUT_FIELDS: OutputField[] = [
   // 識別情報
-  { label: 'book_id', column: 'ZBOOKID' }, // 書籍ID (例: A:B009DEMC8W-0)
+  { label: 'bookId', column: 'ZBOOKID' }, // 書籍ID (例: A:B009DEMC8W-0)
   { label: 'asin', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'ASIN' }, // 純粋なASIN (例: B009DEMC8W)
   // コンテンツ情報
   { label: 'title', column: 'ZDISPLAYTITLE' }, // タイトル
   { label: 'author', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'authors.author' }, // 著者名
-  { label: 'series_name', column: 'series_name' }, // シリーズ名
-  { label: 'series_number', column: 'series_position_label' }, // シリーズ番号
+  { label: 'seriesName', column: 'series_name' }, // シリーズ名
+  { label: 'seriesNumber', column: 'series_position_label' }, // シリーズ番号
   // 出版情報
   { label: 'publisher', column: 'ZRAWPUBLISHER' }, // 出版社名
-  { label: 'publication_date', column: 'ZRAWPUBLICATIONDATE', type: 'unix-timestamp' }, // 出版日
+  { label: 'publicationDate', column: 'ZRAWPUBLICATIONDATE', type: 'unix-timestamp' }, // 出版日
   // メタ情報
-  { label: 'purchase_date', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'purchase_date' }, // 購入日時
-  { label: 'content_tags', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'content_tags.tag' }, // コンテンツタグ配列 (例: ["DICT", "FREE_DICT"])
+  { label: 'purchaseDate', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'purchase_date' }, // 購入日時
+  { label: 'contentTags', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'content_tags.tag' }, // コンテンツタグ配列 (例: ["DICT", "FREE_DICT"])
   { label: 'language', column: 'ZLANGUAGE' }, // 言語コード (例: ja, en, Unknown)
-  { label: 'sort_title', column: 'ZSORTTITLE' }, // ソート用タイトル (カタカナ表記など)
+  { label: 'sortTitle', column: 'ZSORTTITLE' }, // ソート用タイトル (カタカナ表記など)
 ];

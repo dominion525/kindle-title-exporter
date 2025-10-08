@@ -37,18 +37,18 @@ kindle-title-exporter -f json > output.json
 
 The tool exports 12 fields for each book:
 
-- `book_id` - Book ID (e.g., A:B009DEMC8W-0)
+- `bookId` - Book ID (e.g., A:B009DEMC8W-0)
 - `asin` - Pure ASIN (e.g., B009DEMC8W)
 - `title` - Title
 - `author` - Author name(s)
-- `series_name` - Series name (if applicable)
-- `series_number` - Series number (if applicable)
+- `seriesName` - Series name (if applicable)
+- `seriesNumber` - Series number (if applicable)
 - `publisher` - Publisher name
-- `publication_date` - Publication date (ISO 8601)
-- `purchase_date` - Purchase date (ISO 8601)
-- `content_tags` - Content tags (array)
+- `publicationDate` - Publication date (ISO 8601)
+- `purchaseDate` - Purchase date (ISO 8601)
+- `contentTags` - Content tags (array)
 - `language` - Language code (e.g., ja, en)
-- `sort_title` - Sort title (for Japanese: katakana reading)
+- `sortTitle` - Sort title (for Japanese: katakana reading)
 
 ## Author
 

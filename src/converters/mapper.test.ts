@@ -22,18 +22,18 @@ describe('mapRows', () => {
 
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({
-      book_id: 'A:B001-0',
+      bookId: 'A:B001-0',
       asin: null,
       title: 'Test Book',
       author: null,
-      series_name: null,
-      series_number: null,
+      seriesName: null,
+      seriesNumber: null,
       publisher: 'Test Publisher',
-      publication_date: null,
-      purchase_date: null,
-      content_tags: null,
+      publicationDate: null,
+      purchaseDate: null,
+      contentTags: null,
       language: 'ja',
-      sort_title: 'テストブック',
+      sortTitle: 'テストブック',
     });
   });
 
@@ -72,8 +72,8 @@ describe('mapRows', () => {
 
     const result = mapRows(rows);
 
-    expect(result[0].series_name).toBe('Test Series');
-    expect(result[0].series_number).toBe('1');
+    expect(result[0].seriesName).toBe('Test Series');
+    expect(result[0].seriesNumber).toBe('1');
   });
 
   it('Unixタイムスタンプを変換', () => {
@@ -93,7 +93,7 @@ describe('mapRows', () => {
 
     const result = mapRows(rows);
 
-    expect(result[0].publication_date).toBe('2012-11-19T00:00:00.000Z');
+    expect(result[0].publicationDate).toBe('2012-11-19T00:00:00.000Z');
   });
 
   it('出版日が0の場合はnullに変換', () => {
@@ -113,7 +113,7 @@ describe('mapRows', () => {
 
     const result = mapRows(rows);
 
-    expect(result[0].publication_date).toBe(null);
+    expect(result[0].publicationDate).toBe(null);
   });
 });
 
