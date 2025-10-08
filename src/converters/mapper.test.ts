@@ -24,10 +24,10 @@ describe('mapRows', () => {
     expect(result[0]).toEqual({
       book_id: 'A:B001-0',
       asin: null,
-      display_title: 'Test Book',
+      title: 'Test Book',
       author: null,
       series_name: null,
-      series_position: null,
+      series_number: null,
       publisher: 'Test Publisher',
       publication_date: null,
       purchase_date: null,
@@ -46,8 +46,8 @@ describe('mapRows', () => {
     const result = mapRows(rows);
 
     expect(result).toHaveLength(2);
-    expect(result[0].display_title).toBe('Book 1');
-    expect(result[1].display_title).toBe('Book 2');
+    expect(result[0].title).toBe('Book 1');
+    expect(result[1].title).toBe('Book 2');
   });
 
   it('空の配列を処理', () => {
@@ -73,7 +73,7 @@ describe('mapRows', () => {
     const result = mapRows(rows);
 
     expect(result[0].series_name).toBe('Test Series');
-    expect(result[0].series_position).toBe('1');
+    expect(result[0].series_number).toBe('1');
   });
 
   it('Unixタイムスタンプを変換', () => {

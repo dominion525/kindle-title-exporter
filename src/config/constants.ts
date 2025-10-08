@@ -23,10 +23,10 @@ export const OUTPUT_FIELDS: OutputField[] = [
   { label: 'book_id', column: 'ZBOOKID' }, // 書籍ID (例: A:B009DEMC8W-0)
   { label: 'asin', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'ASIN' }, // 純粋なASIN (例: B009DEMC8W)
   // コンテンツ情報
-  { label: 'display_title', column: 'ZDISPLAYTITLE' }, // 表示用タイトル
+  { label: 'title', column: 'ZDISPLAYTITLE' }, // タイトル
   { label: 'author', column: 'ZSYNCMETADATAATTRIBUTES', plistPath: 'authors.author' }, // 著者名
   { label: 'series_name', column: 'series_name' }, // シリーズ名
-  { label: 'series_position', column: 'series_position_label' }, // シリーズ内順序
+  { label: 'series_number', column: 'series_position_label' }, // シリーズ番号
   // 出版情報
   { label: 'publisher', column: 'ZRAWPUBLISHER' }, // 出版社名
   { label: 'publication_date', column: 'ZRAWPUBLICATIONDATE', type: 'unix-timestamp' }, // 出版日

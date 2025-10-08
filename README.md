@@ -39,10 +39,10 @@ The tool exports 12 fields for each book:
 
 - `book_id` - Book ID (e.g., A:B009DEMC8W-0)
 - `asin` - Pure ASIN (e.g., B009DEMC8W)
-- `display_title` - Display title
+- `title` - Title
 - `author` - Author name(s)
 - `series_name` - Series name (if applicable)
-- `series_position` - Position in series (if applicable)
+- `series_number` - Series number (if applicable)
 - `publisher` - Publisher name
 - `publication_date` - Publication date (ISO 8601)
 - `purchase_date` - Purchase date (ISO 8601)

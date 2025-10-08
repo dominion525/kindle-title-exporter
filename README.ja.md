@@ -55,10 +55,10 @@ npx kindle-title-exporter -f json > output.json
 - `asin` - 純粋なASIN (例: B009DEMC8W)
 
 ### コンテンツ情報
-- `display_title` - 表示用タイトル
+- `title` - タイトル
 - `author` - 著者名
 - `series_name` - シリーズ名
-- `series_position` - シリーズ内順序
+- `series_number` - シリーズ番号
 
 ### 出版情報
 - `publisher` - 出版社名
