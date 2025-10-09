@@ -44,7 +44,7 @@ export function generateOutput(args: string[]): string {
     : rowsToJson(outputRows);
 }
 
-function main(): void {
+export function main(): void {
   try {
     const content = generateOutput(process.argv.slice(2));
     process.stdout.write(content);
