@@ -3,6 +3,7 @@ import { readTableData } from '../../src/db/reader';
 import { resolve } from 'path';
 
 const TEST_DB_PATH = resolve(__dirname, '../fixtures/test-db.sqlite');
+const EMPTY_DB_PATH = resolve(__dirname, '../fixtures/empty-db.sqlite');
 const INVALID_DB_PATH = resolve(__dirname, '../fixtures/non-existent.sqlite');
 
 describe('readTableData', () => {
@@ -80,8 +81,8 @@ describe('readTableData', () => {
   });
 
   it('空のDBの場合、columnsは空配列を返す', () => {
-    // 空のDBを作成するのは複雑なので、ここでは単純なテストとしてスキップ可能
-    // 実装上、rows.length === 0の場合 columns = [] となることを確認
-    // この動作は実装で保証されているため、ここではコメントのみ
+    const result = readTableData(EMPTY_DB_PATH);
+    expect(result.rows).toHaveLength(0);
+    expect(result.columns).toEqual([]);
   });
 });

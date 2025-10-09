@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { decodePlistField, getPlistValue } from './plist';
+import { decodePlistField, getPlistValue, decodeNSKeyedArchive } from './plist';
 import type { PlistData } from '../types/index';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
@@ -117,5 +117,76 @@ describe('decodePlistField', () => {
 
     // 著者は文字列または配列のいずれか
     expect(authors).toBeDefined();
+  });
+});
+
+describe('decodeNSKeyedArchive', () => {
+  it('$topが存在しない場合にnullを返す', () => {
+    const invalidParsed = [
+      {
+        $objects: ['dummy'],
+        // $topが存在しない
+      }
+    ];
+    const result = decodeNSKeyedArchive(invalidParsed);
+    expect(result).toBeNull();
+  });
+
+  it('$top.rootが存在しない場合にnullを返す', () => {
+    const invalidParsed = [
+      {
+        $objects: ['dummy'],
+        $top: {
+          // rootが存在しない
+        }
+      }
+    ];
+    const result = decodeNSKeyedArchive(invalidParsed);
+    expect(result).toBeNull();
+  });
+
+  it('root.UIDがnumber以外の場合にnullを返す', () => {
+    const invalidParsed = [
+      {
+        $objects: ['dummy'],
+        $top: {
+          root: { UID: 'not-a-number' } // UIDが文字列
+        }
+      }
+    ];
+    const result = decodeNSKeyedArchive(invalidParsed);
+    expect(result).toBeNull();
+  });
+
+  it('$objectsが存在しない場合にnullを返す', () => {
+    const invalidParsed = [
+      {
+        // $objectsが存在しない
+        $top: {
+          root: { UID: 1 }
+        }
+      }
+    ];
+    const result = decodeNSKeyedArchive(invalidParsed);
+    expect(result).toBeNull();
+  });
+
+  it('rootObjにattributesが存在しない場合にnullを返す', () => {
+    const invalidParsed = [
+      {
+        $objects: [
+          'dummy',
+          {
+            // attributesフィールドが存在しない
+            someOtherField: 'value'
+          }
+        ],
+        $top: {
+          root: { UID: 1 }
+        }
+      }
+    ];
+    const result = decodeNSKeyedArchive(invalidParsed);
+    expect(result).toBeNull();
   });
 });

@@ -9,17 +9,24 @@ import type { OutputField } from '../types/index';
  * @returns 変換された値
  */
 export function convertFieldValue(rawValue: unknown, field: OutputField): unknown {
+  let result: unknown;
   switch (true) {
-    case field.plistPath && !!rawValue:
+    case field.plistPath && !!rawValue: {
       const plist = decodePlistField(rawValue as Buffer);
-      return getPlistValue(plist, field.plistPath);
+      result = getPlistValue(plist, field.plistPath);
+      break;
+    }
     case !!field.plistPath:
-      return null;
+      result = null;
+      break;
     case field.type === 'unix-timestamp' && typeof rawValue === 'number':
-      return rawValue === 0 ? null : new Date(rawValue * 1000).toISOString();
+      result = rawValue === 0 ? null : new Date(rawValue * 1000).toISOString();
+      break;
     default:
-      return rawValue;
+      result = rawValue;
+      break;
   }
+  return result;
 }
 
 /**

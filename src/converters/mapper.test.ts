@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 import { mapRows, convertFieldValue } from './mapper';
 import type { OutputField } from '../types/index';
 
@@ -128,6 +130,30 @@ describe('convertFieldValue', () => {
     const field: OutputField = { label: 'author', column: 'COL', plistPath: 'authors.author' };
     expect(convertFieldValue(null, field)).toBe(null);
     expect(convertFieldValue(undefined, field)).toBe(null);
+  });
+
+  it('plistPath指定時に実際のplistデータから値を取得', () => {
+    const samplePlistPath = resolve(__dirname, '../../test/fixtures/sample-plist.bin');
+    const plistBuffer = readFileSync(samplePlistPath);
+
+    // ASINフィールドを取得
+    const asinField: OutputField = { label: 'asin', column: 'COL', plistPath: 'ASIN' };
+    expect(convertFieldValue(plistBuffer, asinField)).toBe('B06W9KK63F');
+
+    // 著者フィールドを取得
+    const authorField: OutputField = { label: 'author', column: 'COL', plistPath: 'authors.author' };
+    expect(convertFieldValue(plistBuffer, authorField)).toBe('Prabhat Prakashan');
+
+    // 存在しないフィールドはnullを返す
+    const nonExistentField: OutputField = { label: 'test', column: 'COL', plistPath: 'non.existent.field' };
+    expect(convertFieldValue(plistBuffer, nonExistentField)).toBe(null);
+  });
+
+  it('plistPath指定時にfalsyな値（0, false, 空文字）ならnull', () => {
+    const field: OutputField = { label: 'author', column: 'COL', plistPath: 'authors.author' };
+    expect(convertFieldValue(0, field)).toBe(null);
+    expect(convertFieldValue(false, field)).toBe(null);
+    expect(convertFieldValue('', field)).toBe(null);
   });
 
   it('unix-timestamp型で値が0ならnull', () => {
