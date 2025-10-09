@@ -2,7 +2,7 @@
 import bplistParser from 'bplist-parser';
 import type { PlistData } from '../types/index';
 
-function decodeNSKeyedArchive(parsed: unknown[]): PlistData | null {
+export function decodeNSKeyedArchive(parsed: unknown[]): PlistData | null {
   if (!parsed || !parsed[0] || typeof parsed[0] !== 'object' || !parsed[0]) {
     return null;
   }
